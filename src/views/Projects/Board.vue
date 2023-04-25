@@ -1,0 +1,3 @@
+<template>
+    Board keyfisi
+</template>
