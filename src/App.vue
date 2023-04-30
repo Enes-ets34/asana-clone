@@ -3,6 +3,8 @@
 </script>
 
 <template>
+  <appHeader />
+  <appSidebar />
   <router-view></router-view>
 </template>
 
