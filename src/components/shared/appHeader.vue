@@ -1,10 +1,14 @@
 <script setup>
 import { ref } from 'vue';
-const dropMenu = ref(false)
+import useIsLoginPage from '../../composables/hide';
 
+const { isLoginPage } = useIsLoginPage();
+console.log('isLoginPage.value :>> ', isLoginPage.value);
+const dropMenu = ref(false)
 </script>
 <template>
-    <header class="py-2 px-5  border-b border-neutral-700 bg-[#252628] z-[10] flex justify-between items-center fixed top-0 w-full">
+    <header
+        class="py-2 px-5  border-b border-neutral-700 bg-[#252628] z-[10] flex justify-between items-center fixed top-0 w-full">
         <div class="flex items-center space-x-2">
             <i
                 class="fa-solid   fa-bars text-white text-2xl rounded-md active:ring-[#a2a0a2] active:bg-[#3d3e40] cursor-pointer hover:bg-[#323335] px-2"></i>
@@ -14,8 +18,7 @@ const dropMenu = ref(false)
                 </path>
             </svg>
             <div class="group">
-                <button @click="dropMenu = !dropMenu"
-                :class="{'bg-[#3d3e40]  ring-[#a2a0a2]':dropMenu}"
+                <button @click="dropMenu = !dropMenu" :class="{ 'bg-[#3d3e40]  ring-[#a2a0a2]': dropMenu }"
                     class=" bg-[#1e1f21] hidden sm:flex ring-1 hover:ring-[#6a696a] hover:bg-[#323335] ring-[#424244] py-1.5 px-2 pr-3 space-x-2 text-white rounded-full text-sm  items-center transition-all duration-300 ">
                     <div class="rounded-full px-1 bg-[#f06a6a]">
                         <i class="fa-solid fa-plus"></i>
@@ -23,7 +26,7 @@ const dropMenu = ref(false)
                     <span>
                         Create
                     </span>
-                    
+
                 </button>
                 <div v-if="dropMenu"
                     class="bg-white drop-shadow-lg text-black absolute rounded-md z-10 left-44 top-2 transition-all duration-300  w-48 border ">
