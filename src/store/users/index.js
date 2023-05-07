@@ -17,6 +17,24 @@ export default {
       state.access_token = pAccessToken;
       localStorage.access_token = pAccessToken;
     },
+    logout(state) {
+      appAxios
+        .get("/user/logout")
+        .then((res) => {
+          state.user = null;
+          state.access_token = null;
+          localStorage.removeItem("user");
+          localStorage.removeItem("access_token");
+          router.push("/login");
+        })
+        .catch((err) => {
+          state.user = null;
+          state.access_token = null;
+          localStorage.removeItem("user");
+          localStorage.removeItem("access_token");
+          router.push("/login");
+        });
+    },
   },
   actions: {
     login({ commit }, pUser) {

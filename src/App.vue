@@ -11,4 +11,4 @@ const { isLoginPage } = useIsLoginPage();
   <router-view></router-view>
 </template>
 
-<style></style>
+

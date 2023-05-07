@@ -1,10 +1,18 @@
 <script setup>
 import { ref } from 'vue';
+
 import useIsLoginPage from '../../composables/hide';
+import { useStore } from 'vuex';
 
 const { isLoginPage } = useIsLoginPage();
 console.log('isLoginPage.value :>> ', isLoginPage.value);
 const dropMenu = ref(false)
+const profileMenu = ref(false)
+const store = useStore()
+
+const logout = () => {
+    store.commit('users/logout')
+}
 </script>
 <template>
     <header
@@ -29,7 +37,7 @@ const dropMenu = ref(false)
 
                 </button>
                 <div v-if="dropMenu"
-                    class="bg-white drop-shadow-lg text-black absolute rounded-md z-10 left-44 top-2 transition-all duration-300  w-48 border ">
+                    class="bg-white drop-shadow-lg text-sm text-black absolute rounded-md z-10 left-44 top-2 transition-all duration-300  w-48 border ">
                     <ul class="">
                         <li
                             class="flex justify-start items-center p-3 space-x-3  hover:rounded-t-md cursor-pointer hover:bg-neutral-200 transition-all duration-300">
@@ -77,8 +85,49 @@ const dropMenu = ref(false)
                 placeholder="Search">
         </div>
 
-        <div class="bg-pink-500 rounded-full text-lg px-1 text-white">
-            ES
+
+        <div class="group">
+            <button @click="profileMenu = !profileMenu" class="bg-pink-500 rounded-full text-lg px-1 text-white ">
+                ES
+
+            </button>
+            <div v-if="profileMenu"
+                class="bg-white drop-shadow-lg  text-sm text-black absolute rounded-md z-10 right-5 top-15 transition-all duration-300  w-48 border ">
+                <ul class="">
+                    <li
+                        class="flex justify-start items-center p-3 space-x-2 border-b  hover:rounded-t-md cursor-pointer hover:bg-neutral-200 transition-all duration-300">
+                        <i class="fa-solid fa-check"></i> <span>My Workspace</span>
+                        <i class="fa-sharp text-yellow-500 fa-solid fa-circle fa-2xs"></i>
+                    </li>
+
+                    <li
+                        class="flex justify-start items-center p-3 pl-8 space-x-3  cursor-pointer hover:bg-neutral-200 transition-all duration-300">
+                        <span>Admin Console</span>
+                    </li>
+                    <li
+                        class="flex justify-between items-center py-3 pr-4 pl-8 space-x-3 border-b hover:rounded-s-md cursor-pointer hover:bg-neutral-200 transition-all duration-300">
+                        <span>More</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </li>
+
+                    <li
+                        class="flex justify-start items-center py-3 px-2 space-x-1   hover:rounded-t-md cursor-pointer hover:bg-neutral-200 transition-all duration-300">
+                        <small class="bg-pink-500 rounded-full text-xs  p-1 text-white ">
+                            ES
+                        </small>
+                        <span>My Profile</span>
+                    </li>
+                    <li
+                        class="flex justify-start items-center p-3 pl-9 space-x-3  cursor-pointer hover:bg-neutral-200 transition-all duration-300">
+                        <span>My Settings...</span>
+                    </li>
+                    <li @click="logout"
+                        class="flex justify-start items-center p-3 pl-9 space-x-3  cursor-pointer hover:bg-neutral-200 transition-all duration-300">
+                        <span>Log Out</span>
+                    </li>
+
+                </ul>
+            </div>
         </div>
 
     </header>

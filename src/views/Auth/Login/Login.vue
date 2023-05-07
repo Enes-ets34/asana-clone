@@ -23,7 +23,7 @@ const showPasswordSection = (e) => {
         </div>
     </header>
     <section>
-        <div class="mx-auto w-full md:w-1/3  px-6 md:px-12">
+        <div class="mx-auto w-full lg:w-1/3 sm:w-1/2  px-6 md:px-12">
             <div class="text-center relative">
                 <div v-if="!showEmailSection" @click="showEmailSection = true"
                     class="absolute -left-15 md:-left-10 text-gray-500 hover:bg-zinc-100 px-1.5 rounded-md cursor-pointer">
@@ -33,8 +33,9 @@ const showPasswordSection = (e) => {
                 <p class="text-gray-500 text-lg font-semibold">To get started, please sign in
                 </p>
             </div>
-            <EmailSection v-if="showEmailSection" @show-password-section="showPasswordSection" :userData="userData" />
+            <EmailSection v-if="showEmailSection" :userData="userData" @show-password-section="showPasswordSection" />
             <PasswordSection v-else :userData="userData" />
         </div>
     </section>
 </template>
+<style></style>
