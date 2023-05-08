@@ -15,7 +15,13 @@ const routes = [
   {
     path: "/register",
     name: "Register",
-    component: () => import("../views/Auth/Register.vue"),
+    component: () => import("../views/Auth/Register/Register.vue"),
+    children: [
+      {
+        path: "password",
+        component: () => import("../views/auth/Register/Password.vue"),
+      },
+    ],
   },
   {
     path: "/board",

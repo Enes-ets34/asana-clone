@@ -1,13 +1,22 @@
 <script setup>
-import useIsLoginPage from './composables/hide';
+import { computed } from 'vue';
+import {useRouter} from 'vue-router'
 
-const { isLoginPage } = useIsLoginPage();
+const route = useRouter();
+const currentRoute = computed(() => {
+  return route.currentRoute.value.fullPath
+})
+
+const hideHeader = computed(() => {
+   return currentRoute.value.includes('/register') || currentRoute.value.includes('/login')
+})
+
 
 </script>
 
 <template>
-  <appHeader v-if="!isLoginPage" />
-  <appSidebar v-if="!isLoginPage" />
+  <appHeader v-if="!hideHeader" />
+  <appSidebar v-if="!hideHeader" />
   <router-view></router-view>
 </template>
 

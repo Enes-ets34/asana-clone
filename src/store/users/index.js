@@ -7,6 +7,7 @@ export default {
   state: {
     user: null,
     access_token: null,
+    registerData: null,
   },
   mutations: {
     setUser(state, pUser) {
@@ -16,6 +17,9 @@ export default {
     setAccessToken(state, pAccessToken) {
       state.access_token = pAccessToken;
       localStorage.access_token = pAccessToken;
+    },
+    setUserInfo(state, pUser) {
+      state.registerData = pUser;
     },
     logout(state) {
       appAxios
@@ -45,6 +49,20 @@ export default {
             console.log("res.data :>> ", res.data);
             commit("setUser", res?.data || null);
             commit("setAccessToken", res?.data?.tokens?.access_token || null);
+            router.push("/");
+          }
+        })
+        .catch((err) => {
+          console.error(err.response.data.error);
+        });
+    },
+    register({ commit }, pUser) {
+      appAxios
+        .post("/user", pUser)
+        .then((res) => {
+          if (!res.message) {
+            commit("setUser", res?.user || null);
+            commit("setAccessToken", res?.user?.tokens?.access_token || null);
             router.push("/");
           }
         })

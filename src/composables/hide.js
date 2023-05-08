@@ -1,11 +1,13 @@
-import { useRoute } from 'vue-router';
-import { computed } from 'vue';
-
+import { useRoute } from "vue-router";
+import { computed } from "vue";
+const route = useRoute();
+const currentRoute = computed(() => {
+  return route.currentRoute.value.fullPath;
+});
 export default function useIsLoginPage() {
-  const route = useRoute();
-
   const isLoginPage = computed(() => {
-    return route.name === 'Login' || route.name === 'Register';
+    console.log("currentRoute.value :>> ", currentRoute.value);
+    return route.name.includes("Login") || route.name.includes("Register");
   });
 
   return {

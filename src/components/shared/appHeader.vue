@@ -1,18 +1,15 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
-import useIsLoginPage from '../../composables/hide';
 import { useStore } from 'vuex';
 
-const { isLoginPage } = useIsLoginPage();
-console.log('isLoginPage.value :>> ', isLoginPage.value);
 const dropMenu = ref(false)
 const profileMenu = ref(false)
 const store = useStore()
-
 const logout = () => {
     store.commit('users/logout')
 }
+const userIcon = computed(() => store?.getters['users/getCurrentUser']?.full_name.split(" ").map(n => n[0]).join("").toUpperCase() || null)
 </script>
 <template>
     <header
@@ -88,7 +85,7 @@ const logout = () => {
 
         <div class="group">
             <button @click="profileMenu = !profileMenu" class="bg-pink-500 rounded-full text-lg px-1 text-white ">
-                ES
+                {{ userIcon }}
 
             </button>
             <div v-if="profileMenu"
