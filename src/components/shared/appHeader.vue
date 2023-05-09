@@ -84,7 +84,7 @@ const userIcon = computed(() => store?.getters['users/getCurrentUser']?.full_nam
 
 
         <div class="group">
-            <button @click="profileMenu = !profileMenu" class="bg-pink-500 rounded-full text-lg px-1 text-white ">
+            <button @click="profileMenu = !profileMenu" class="bg-pink-500 rounded-full  p-1 w-8 h-8 text-white ">
                 {{ userIcon }}
 
             </button>
@@ -102,15 +102,15 @@ const userIcon = computed(() => store?.getters['users/getCurrentUser']?.full_nam
                         <span>Admin Console</span>
                     </li>
                     <li
-                        class="flex justify-between items-center py-3 pr-4 pl-8 space-x-3 border-b hover:rounded-s-md cursor-pointer hover:bg-neutral-200 transition-all duration-300">
+                        class="flex justify-between items-center py-3 pr-4 pl-8 space-x-3 border-b  cursor-pointer hover:bg-neutral-200 transition-all duration-300">
                         <span>More</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </li>
 
                     <li
-                        class="flex justify-start items-center py-3 px-2 space-x-1   hover:rounded-t-md cursor-pointer hover:bg-neutral-200 transition-all duration-300">
-                        <small class="bg-pink-500 rounded-full text-xs  p-1 text-white ">
-                            ES
+                        class="flex justify-start items-center py-3 px-2 space-x-1    cursor-pointer hover:bg-neutral-200 transition-all duration-300">
+                        <small class="bg-pink-500 rounded-full text-xs w-6 h-6  p-1 text-white ">
+                            {{userIcon}}
                         </small>
                         <span>My Profile</span>
                     </li>
@@ -119,7 +119,7 @@ const userIcon = computed(() => store?.getters['users/getCurrentUser']?.full_nam
                         <span>My Settings...</span>
                     </li>
                     <li @click="logout"
-                        class="flex justify-start items-center p-3 pl-9 space-x-3  cursor-pointer hover:bg-neutral-200 transition-all duration-300">
+                        class="flex justify-start items-center p-3 pl-9 space-x-3 hover:rounded-b-md  cursor-pointer hover:bg-neutral-200 transition-all duration-300">
                         <span>Log Out</span>
                     </li>
 
