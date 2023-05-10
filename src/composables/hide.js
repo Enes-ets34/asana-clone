@@ -7,7 +7,7 @@ const currentRoute = computed(() => {
 export default function useIsLoginPage() {
   const isLoginPage = computed(() => {
     console.log("currentRoute.value :>> ", currentRoute.value);
-    return route.name.includes("Login") || route.name.includes("Register");
+    return route.name.includes("Login") || route.name.includes("Register") || route.name.includes("CreateProjects")
   });
 
   return {

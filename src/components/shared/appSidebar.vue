@@ -2,6 +2,7 @@
 
 </script>
 <template>
+   
    <aside id="default-sidebar"
       class="fixed top-12 left-0 z-5 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0">
       <div class="h-full  py-4 overflow-y-auto bg-[#1e1f21] ">

@@ -84,7 +84,7 @@
 			</ul>
 		</div>
 		<div class="flex  sm:!pr-[100px] pb-48 bg-[#f9f8f8] overflow-scroll sm:p-5  space-x-2 w-screen  h-screen">
-			<div v-for="i in 5" :key="i"
+			<div
 				class="sm:w-1/5 w-full hover:cursor-pointer hover:ring-1 ring-neutral-200 rounded-lg px-3 py-2 flex-shrink-0 flex flex-col flex-wrap">
 				<div class="group flex justify-between items-center">
 					<h4 class="font-semibold">To do</h4>
@@ -96,14 +96,15 @@
 					</span>
 				</div>
 				<ul class="space-y-2 flex-1 max-h-full overflow-auto">
-					<li v-for="i in 12"
-						class="px-5 group relative text-sm py-3 ring-1 flex flex-col ring-neutral-300 h-24 bg-white rounded-md hover:ring-neutral-400 transition-all duration-400 hover:drop-shadow-lg">
-						<span class="flex justify-start  items-center">
+					<li
+						class="px-5 group relative text-sm py-3 border flex flex-col border-neutral-300 max-h-full bg-white rounded-md hover:border-neutral-400 transition-all duration-400 hover:drop-shadow-lg">
+						<span class="flex justify-start p-1 items-start">
 							<i
-								class="text-gray-500 mr-1 hover:text-green-500 transition-all duration-300 hover:bg-green-100 rounded-full hover:bg-opacity-75 fa-regular fa-circle-check"></i>
-							Task-1
+								class="text-gray-500 p-1  hover:text-green-500 transition-all duration-300 hover:bg-green-100 rounded-full hover:bg-opacity-75 fa-regular fa-circle-check"></i>
+							<p class="text-sm">Lorem ip Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam
+								sunt amet eveniet.</p>
 						</span>
-						<span class="hidden group-hover:flex mt-4 justify-between items-center">
+						<span class="opacity-0 group-hover:opacity-100 flex mt-4 justify-between items-center">
 							<div class="flex items-center space-x-2">
 								<i
 									class="fa-regular text-gray-600 hover:text-black fa-user p-1.5 rounded-full border border-dashed border-black hover:bg-neutral-500 hover:bg-opacity-20"></i>
@@ -114,7 +115,7 @@
 								class="fa-regular text-gray-600 hover:text-black p-1 rounded-md hover:bg-neutral-500 hover:bg-opacity-20 fa-thumbs-up"></i>
 						</span>
 						<i
-							class="fa-solid fa-ellipsis hidden group-hover:inline  p-3 text-neutral-500 absolute ring-1 ring-neutral-200 hover:ring-neutral-300 transition-all duration-300 right-2 top-2 hover:text-black cursor-pointer hover:bg-gray-200 rounded-md"></i>
+							class="fa-solid z-[1] bg-white fa-ellipsis hidden group-hover:inline  p-3 text-neutral-500 absolute ring-1 ring-neutral-200 hover:ring-neutral-300 transition-all duration-300 right-2 top-2 hover:text-black cursor-pointer hover:bg-gray-200 rounded-md"></i>
 					</li>
 					<button class="text-center hover:bg-neutral-200 w-full rounded-md py-2">
 						+ Add Task
@@ -124,7 +125,7 @@
 			<div
 				class="sm:w-1/5  hover:cursor-pointer hover:ring-1 ring-neutral-200 rounded-lg px-3 py-2 flex-shrink-0 flex flex-col flex-wrap">
 				<div class="group flex justify-between items-center">
-					<h4 class="font-semibold">+ Add Task</h4>
+					<h4 class="font-semibold">+ Add Section</h4>
 				</div>
 			</div>
 		</div>

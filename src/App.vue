@@ -1,6 +1,10 @@
 <script setup>
 import { computed } from 'vue';
-import {useRouter} from 'vue-router'
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex';
+const store = useStore()
+
+store.dispatch('projects/fetchProjects')
 
 const route = useRouter();
 const currentRoute = computed(() => {
@@ -8,13 +12,13 @@ const currentRoute = computed(() => {
 })
 
 const hideHeader = computed(() => {
-   return currentRoute.value.includes('/register') || currentRoute.value.includes('/login')
+  return currentRoute.value.includes('/register') || currentRoute.value.includes('/login') || currentRoute.value.includes('/projects/new')
 })
 
 
 </script>
 
-<template>
+<template >
   <appHeader v-if="!hideHeader" />
   <appSidebar v-if="!hideHeader" />
   <router-view></router-view>

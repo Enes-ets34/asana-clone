@@ -28,6 +28,11 @@ const routes = [
     name: "Board",
     component: () => import("../views/Projects/Board.vue"),
   },
+  {
+    path: "/projects/new",
+    name: "CreateProject",
+    component: () => import("../views/Projects/CreateProject.vue"),
+  },
 ];
 const router = createRouter({
   history: createWebHashHistory(),

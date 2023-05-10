@@ -11,6 +11,7 @@ const dayName = computed(() => {
         day: 'numeric'
     })
 })
+const projects = computed(() => store.getters['projects/getProjectsByUser'])
 const currentUser = computed(() => store.getters['users/getCurrentUser'])
 const currentUserFirstName = computed(() => currentUser.value?.full_name?.split(' ')[0])
 const welcomeMessage = computed(() => {
@@ -45,12 +46,12 @@ const welcomeMessage = computed(() => {
                     <i class="fa-solid fa-caret-right mr-4"></i> Recent Projects
                 </h3>
                 <div class="flex-wrap flex ">
-                    <div v-for="i in 8" class="text-center p-1  cursor-pointer  w-1/4">
+                    <div v-for="project in projects" :key="project._id" class="text-center p-1  cursor-pointer  w-1/4">
                         <div class="bg-sky-300 border p-5 rounded-lg flex items-center justify-center h-24">
                             <i class="fa-solid fa-diagram-project fa-2xl"></i>
                         </div>
                         <span class="font-semibold">
-                            Project-1
+                            {{ project.name }}
                         </span>
                     </div>
                 </div>
