@@ -67,7 +67,19 @@ export default {
           }
         })
         .catch((err) => {
-          alert(err.response.data.error)
+          alert(err.response.data.error);
+        });
+    },
+    updateUser({ commit }, pUser) {
+      appAxios
+        .patch(`/user`, { full_name: pUser.full_name, email: pUser.email })
+        .then((res) => {
+          if (!res.message) {
+            commit("setUser", res?.data || null);
+          }
+        })
+        .catch((err) => {
+          console.log("err.response :>> ", err.response);
         });
     },
   },

@@ -1,4 +1,12 @@
-
+<script setup>
+import { computed, ref } from 'vue';
+import { useStore } from 'vuex';
+const store = useStore()
+const userData = ref(null)
+const createProject = () => {
+    store.dispatch('projects/addProject', userData.value)
+}
+</script>
 <template>
     <div class="flex flex-col md:flex-row h-screen relative">
         <!-- Sol Tarafta Form -->
@@ -11,14 +19,16 @@
                 <h1 class="text-4xl font-light">New project</h1>
                 <div class="flex flex-col">
                     <label for="project_name" class="text-gray-500  mt-10 text-sm">Project name</label>
-                    <input type="text" name="project_name" class="bg-slate-100 rounded-none border-b p-2" id="project_name">
+                    <input v-model="userData" type="text" name="project_name"
+                        class="bg-slate-100 rounded-none border-b p-2" id="project_name">
                 </div>
-                <button
+                <button @click="createProject"
                     class="text-center  transition-all duration-300 mt-6 rounded-md w-full py-2 bg-[#4573d2] hover:bg-[#426dc6] active:bg-[#3f66ba] text-sm text-white">Continue</button>
             </div>
         </div>
         <img src="/public/create_project_avatar.png"
-            class="hidden lg:inline-block object-fill z-10 md:w-[940px] border rounded-lg drop-shadow-lg  md:h-[600px] top-12 right-0 absolute" alt="">
+            class="hidden lg:inline-block object-fill z-10 md:w-[940px] border rounded-lg drop-shadow-lg  md:h-[600px] top-12 right-0 absolute"
+            alt="">
         <div class="hidden lg:flex md:w-1/2  border-r-2 bg-blue-900 items-center  justify-center">
         </div>
 

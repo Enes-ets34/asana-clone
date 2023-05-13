@@ -9,7 +9,12 @@ const store = useStore()
 const logout = () => {
     store.commit('users/logout')
 }
-const userIcon = computed(() => store?.getters['users/getCurrentUser']?.full_name.split(" ").map(n => n[0]).join("").toUpperCase() || null)
+const currentUser = computed(() => store?.getters['users/getCurrentUser'])
+const userIcon = computed(() => currentUser?.value?.full_name.split(" ").map(n => n[0]).join("").toUpperCase() || null)
+const openSettingsModal = () => {
+    store.dispatch('setModal', 'user-settings-modal')
+    profileMenu.value = !profileMenu.value
+}
 </script>
 <template>
     <header
@@ -84,7 +89,7 @@ const userIcon = computed(() => store?.getters['users/getCurrentUser']?.full_nam
 
 
         <div class="group">
-            <button @click="profileMenu = !profileMenu" class="bg-pink-500 rounded-full  p-1 w-8 h-8 text-white ">
+            <button @click="profileMenu = !profileMenu" class="bg-pink-500 rounded-full text-center   w-8 h-8 text-white ">
                 {{ userIcon }}
 
             </button>
@@ -109,12 +114,12 @@ const userIcon = computed(() => store?.getters['users/getCurrentUser']?.full_nam
 
                     <li
                         class="flex justify-start items-center py-3 px-2 space-x-1    cursor-pointer hover:bg-neutral-200 transition-all duration-300">
-                        <small class="bg-pink-500 rounded-full text-xs w-6 h-6  p-1 text-white ">
-                            {{userIcon}}
+                        <small class="bg-pink-500  rounded-full text-xs w-6 h-6  items-center flex justify-center text-white ">
+                            {{ userIcon }}
                         </small>
                         <span>My Profile</span>
                     </li>
-                    <li
+                    <li @click="openSettingsModal"
                         class="flex justify-start items-center p-3 pl-9 space-x-3  cursor-pointer hover:bg-neutral-200 transition-all duration-300">
                         <span>My Settings...</span>
                     </li>

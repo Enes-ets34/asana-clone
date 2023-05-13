@@ -1,9 +1,13 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import draggable from 'vuedraggable'
+import appAxios from '../../utils/appAxios';
+import { useRouter } from 'vue-router';
+const route = useRouter()
+const project = ref({})
 const list1 = ref([{ name: 'task-1', id: 1 }, { name: 'task-3', id: 2 }])
 const list2 = ref([{ name: 'task-2', id: 3 }, { name: 'task-4', id: 4 }])
-let idGlobal = ref(8);
+let idGlobal = ref(null);
 const controlOnStart = ref(true)
 const clone = ({ name }) => {
 	return { name, id: idGlobal.value++ };
@@ -14,6 +18,15 @@ const pullFunction = () => {
 const start = ({ originalEvent }) => {
 	controlOnStart.value = originalEvent.ctrlKey;
 }
+
+const projectID = computed(() => route.currentRoute.value.params.id)
+appAxios.get(`/project/${projectID?.value}`)
+	.then((res) => {
+		project.value = res?.data?.project
+	}).catch((err) => {
+		console.log(err.response.data);
+
+	});
 </script>
 <template>
 	<div class="fixed overflow-auto sm:left-15  pb-24 sm:ml-64 mt-12 h-full w-full ">
@@ -22,7 +35,7 @@ const start = ({ originalEvent }) => {
 				<i class="fa-solid fa-diagram-project fa-xl"></i>
 			</div>
 			<div class="flex justify-between items-center space-x-2">
-				<h3 class="text-xl font-semibold">Project-1</h3>
+				<h3 class="text-xl font-semibold">{{ project.name }}</h3>
 				<span class="px-1 rounded-md transition-all duration-300 hover:bg-neutral-100 group cursor-pointer">
 					<i
 						class="fa-solid fa-chevron-down group-hover:text-black transition-all duration-300 text-gray-400"></i>
@@ -30,6 +43,11 @@ const start = ({ originalEvent }) => {
 				<span class="px-1 rounded-md transition-all duration-300 hover:bg-neutral-100 group cursor-pointer">
 					<i class="fa-regular fa-star group-hover:text-sky-500 transition-all duration-300 text-gray-400"></i>
 				</span>
+				<span class="px-1 rounded-md transition-all duration-300 hover:bg-neutral-100 group cursor-pointer">
+					<i @click="$store.dispatch('projects/deleteProject', project._id)"
+						class="fa-solid fa-trash-can  group-hover:text-red-500 transition-all duration-300 text-gray-400"></i>
+				</span>
+
 				<span
 					class="px-2 py-1 text-sm rounded-md hover:text-black transition-all duration-300 hover:bg-neutral-100 text-gray-500 group cursor-pointer">
 					<i class="fa-sharp fa-regular fa-circle fa-xs "></i>

@@ -1,13 +1,16 @@
 <script setup>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 
+const store = useStore()
+const projects = computed(() => store.getters['projects/getProjectsByUser'])
 </script>
 <template>
-   
    <aside id="default-sidebar"
       class="fixed top-12 left-0 z-5 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0">
       <div class="h-full  py-4 overflow-y-auto bg-[#1e1f21] ">
          <ul class="font-medium px-3 border-b pb-4 border-neutral-700 mb-5">
-            <li
+            <router-link to="/"
                class="flex space-x-2 hover:bg-[#2b2c2e] transition-all duration-300 items-center p-2 text-white rounded-lg text-sm active:bg-[#373839] cursor-pointer">
                <svg class="w-5 fill-[#a2a0a2]" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
                   <path
@@ -15,7 +18,7 @@
                   </path>
                </svg>
                <span class="">Home</span>
-            </li>
+            </router-link>
             <li
                class="flex space-x-2 transition-all duration-300 hover:bg-[#2b2c2e] items-center p-2 text-white rounded-lg  active:bg-[#373839] text-sm cursor-pointer">
                <svg class="w-5 fill-[#a2a0a2]" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
@@ -61,6 +64,7 @@
                      </svg>
 
                      <span class="">My Workspace</span>
+
                   </span>
                   <svg class="hidden group-hover:inline" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
                      <path
@@ -93,7 +97,7 @@
                      <i class="fa-solid fa-plus"></i>
                   </span>
                </div>
-               <div v-if="true"
+               <div v-if="!projects || projects?.length === 0"
                   class="  justify-center  group opacity-0 hidden group-hover:flex   group-hover:opacity-100 py-6  px-12 transition-all duration-300 bg-[#2b2c2e] items-center p-2 text-white rounded-lg  text-sm ">
                   <span class="flex flex-col  text-center space-x-2 items-center">
                      <img
@@ -107,15 +111,15 @@
                         Project</button>
                   </span>
                </div>
-               <div v-else
+               <router-link :to="`/board/${project._id}`" v-else v-for="project in projects" :key="project._id"
                   class=" justify-between group opacity-0 hidden group-hover:flex group-hover:opacity-100  px-3 transition-all duration-300 hover:bg-[#2b2c2e] items-center p-2 text-white rounded-lg  active:bg-[#373839] text-sm cursor-pointer">
                   <span class="flex space-x-2 items-center">
                      <div class="bg-sky-500 rounded-md p-2 h-2 w-2">
 
                      </div>
-                     <span class="">Project-1</span>
+                     <span class="">{{ project?.name }}</span>
                   </span>
-               </div>
+               </router-link>
             </li>
             <li
                class=" flex-col space-x-2  group  px-1 transition-all duration-300 items-center py-2 -pl-12 text-white rounded-lg text-sm   cursor-pointer">

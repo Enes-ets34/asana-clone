@@ -21,7 +21,7 @@ const welcomeMessage = computed(() => {
     if (today.getHours() > 12 && today.getHours() < 18) {
         return `Good Afternoon, ${currentUserFirstName.value}`
     }
-    if (today.getHours() > 18 && today.getHours() < 23) {
+    if (today.getHours() > 18 && today.getHours() <= 23) {
         return `Good Night, ${currentUserFirstName.value}`
     }
 })
