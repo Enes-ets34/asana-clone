@@ -4,6 +4,8 @@ import users from "./users";
 
 import projects from "./projects";
 
+import toastNotif from "./toastNotif";
+
 export default createStore({
   namespaced: true,
   state: {
@@ -23,5 +25,6 @@ export default createStore({
   modules: {
     users,
     projects,
+    toastNotif,
   },
 });

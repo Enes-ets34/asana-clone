@@ -1,6 +1,7 @@
 import store from "../index";
 import router from "../../router";
 import appAxios from "../../utils/appAxios";
+import toastNotif from "../toastNotif";
 
 export default {
   namespaced: true,
@@ -14,22 +15,24 @@ export default {
     filterProjects(state, pProjectID) {
       state.projects = state.projects.filter((p) => p._id !== pProjectID);
     },
-    addProjects(state, pProject) {
+    addProject(state, pProject) {
       state.projects.push(pProject);
     },
   },
   actions: {
     fetchProjects({ commit }) {
-      appAxios
-        .get("/user/projects")
-        .then((res) => {
-          if (res.status === 200) {
-            commit("setProjects", res.data);
-          }
-        })
-        .catch((err) => {
-          console.error(err.response.data.error);
-        });
+      if (localStorage?.access_token) {
+        appAxios
+          .get("/user/projects")
+          .then((res) => {
+            if (res.status === 200) {
+              commit("setProjects", res.data);
+            }
+          })
+          .catch((err) => {
+            console.error(err.response.data.error);
+          });
+      }
     },
     deleteProject({ commit }, pProjectID) {
       if (confirm("ARE YOU SURE?")) {
@@ -50,14 +53,16 @@ export default {
       appAxios
         .post(`/project`, { name: pProject })
         .then((res) => {
-          console.log("buraya geldi");
           if (res.status === 201) {
-            commit("addProject", pProject);
+            commit("addProject", res?.data);
             router.push("/");
           }
         })
         .catch((err) => {
-          console.error(err.response.data.error);
+          toastNotif.dispatch("showMessage", {
+            message: err.response.data.message,
+            type: "error",
+          });
         });
     },
   },

@@ -11,7 +11,7 @@ const appAxios = axios.create({
 appAxios.interceptors.request.use((config) => {
   config.headers = {
     ...config.headers,
-     Authorization: `Bearer: ${localStorage.access_token}`,
+     Authorization: `Bearer: ${localStorage?.access_token}`,
   };
   return config;
 });

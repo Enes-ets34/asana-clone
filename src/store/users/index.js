@@ -1,6 +1,7 @@
 import store from "../index";
 import router from "../../router";
 import appAxios from "../../utils/appAxios";
+import toastNotif from "../toastNotif";
 
 export default {
   namespaced: true,
@@ -53,7 +54,10 @@ export default {
           }
         })
         .catch((err) => {
-          console.error(err.response.data.error);
+          toastNotif.dispatch("showMessage", {
+            message: err.response.data.message,
+            type: "error",
+          });
         });
     },
     register({ commit }, pUser) {

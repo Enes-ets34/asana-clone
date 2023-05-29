@@ -4,7 +4,7 @@ import { useStore } from 'vuex';
 const store = useStore()
 const userData = ref(null)
 const createProject = () => {
-    store.dispatch('projects/addProject', userData.value)
+    store.dispatch('projects/createProject', userData.value)
 }
 </script>
 <template>
